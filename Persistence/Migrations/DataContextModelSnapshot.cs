@@ -17,7 +17,7 @@ namespace Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.4");
 
-            modelBuilder.Entity("Domain.ToDoTask", b =>
+            modelBuilder.Entity("Domain.ToDo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -26,7 +26,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DeadLine")
+                    b.Property<DateTime?>("DeadLine")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")

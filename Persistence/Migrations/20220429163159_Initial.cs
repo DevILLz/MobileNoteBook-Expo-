@@ -18,7 +18,7 @@ namespace Persistence.Migrations
                     IsCompleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     IsImportant = table.Column<bool>(type: "INTEGER", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DeadLine = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    DeadLine = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

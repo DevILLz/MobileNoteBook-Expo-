@@ -7,6 +7,6 @@
         public bool IsCompleted { get; set; }
         public bool IsImportant { get; set; }
         public DateTime CreationDate { get; set; }
-        public DateTime DeadLine { get; set; }
+        public DateTime? DeadLine { get; set; }
     }
 }
