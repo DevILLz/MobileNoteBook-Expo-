@@ -31,7 +31,7 @@ namespace TestForMonarchy.Extensions
             });
             services.AddCors(opt => {
                 opt.AddPolicy("CorsPolicy", policy => {
-                    policy.AllowAnyMethod().AllowAnyHeader().AllowCredentials().WithOrigins("http://192.168.1.61:19000", "http://localhost:19006");
+                    policy.AllowAnyMethod().AllowAnyHeader().AllowCredentials().WithOrigins("http://192.168.1.61:19000", "http://localhost:19006", "http://localhost:19000");
                 });
             });
             services.AddMediatR(typeof(Application.ToDoList.Create).Assembly);
