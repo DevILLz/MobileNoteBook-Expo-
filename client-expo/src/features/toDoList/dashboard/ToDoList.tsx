@@ -42,9 +42,6 @@ export default observer(function ToDoList() {
                   </View>
                 : <Button title="Add new Note" onPress={HandleAdd} color='orange' />
             }
-            <View style={styles.item}>
-                    <EditForm closeForm={HandleAdd} />
-                  </View>
             <SectionList
                 sections={DATA}
                 keyExtractor={(item) => item.id}
