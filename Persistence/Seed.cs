@@ -14,7 +14,7 @@ namespace Persistence
                 {
                     new ToDo
                     {
-                        Description = "send out 100 responses to vacancies",
+                        Description = "Send out 100 responses to vacancies",
                         IsCompleted = false,
                         IsImportant = true,
                         CreationDate = new DateTime(now.Year, now.Month <= 1 ? 1 : now.Month - 1, 1),

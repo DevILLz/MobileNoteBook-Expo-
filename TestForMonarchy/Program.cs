@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices(builder.Configuration)
                 .AddApplicationServicesAsync(builder.Configuration);
 
-
+builder.WebHost.UseUrls(urls: "http://*:5000");
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();

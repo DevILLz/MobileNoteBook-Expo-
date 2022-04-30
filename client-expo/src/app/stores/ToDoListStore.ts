@@ -57,7 +57,7 @@ export default class ToDoListStore {
             await agent.toDoList.update(note);
             runInAction(() => {
                 if (note.id){
-                    let updatednote = {...this.getnote(note.id), ...note}
+                    let updatednote = {...this.getToDo(note.id), ...note}
                     this.toDoList.set(note.id, updatednote as toDo);
                     this.selectedToDo = updatednote as toDo;
                 }
@@ -90,10 +90,11 @@ export default class ToDoListStore {
     }
     private setToDo(toDo: toDo) {
         toDo.creationDate = new Date(toDo.creationDate!)
-        toDo.deadLine = new Date(toDo.deadLine!)
+        if (toDo.deadLine)
+            toDo.deadLine = new Date(toDo.deadLine)
         this.toDoList.set(toDo.id, toDo)
     }
-    private getnote = (id: string) => {
+    private getToDo = (id: string) => {
         return this.toDoList.get(id);
     }
 }

@@ -1,6 +1,5 @@
 import { toDo, toDoFormValues } from '../models/toDo';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { history } from '../../../App';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -9,7 +8,7 @@ const sleep = (delay: number) => {
 }
 
 // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL = "http://192.168.1.72:5000/api";
 
 axios.interceptors.response.use(async response => {
     
@@ -38,7 +37,7 @@ axios.interceptors.response.use(async response => {
             break;
 
         case 404:
-            history.push('/not-found')
+            // history.push('/not-found')
             break;
 
     }

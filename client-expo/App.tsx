@@ -1,11 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import ToDoDashboard from './src/features/toDoList/dashboard/ToDoDashboard';
+
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <View style={styles.anyItem}>
+      
+      <ToDoDashboard/>
+      </View>
     </View>
   );
 }
@@ -13,8 +17,18 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#cccccc',
+    alignItems: 'stretch',    
+    textShadowColor:'#585858',
+    textShadowOffset:{width: 3, height: 3},
+    textShadowRadius:12,
+    
+    // justifyContent: 'center',
+    // border: '6px ridge rgba(211, 220, 50, .6)'
   },
+  anyItem: {
+    
+    marginTop: 30,
+    margin: 5
+  }
 });
