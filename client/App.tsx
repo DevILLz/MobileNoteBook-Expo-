@@ -11,7 +11,7 @@ import NotFound from './src/features/errors/NotFound';
 export const history = createBrowserHistory();
 export default function App() {
   return (
-    <View style={styles.container}>      
+    <View >      
       <Router history={history}>
         <Route exact path='/' component={ToDoDashboard} />
         <Route
@@ -31,11 +31,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+

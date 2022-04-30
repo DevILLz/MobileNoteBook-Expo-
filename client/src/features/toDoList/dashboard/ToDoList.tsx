@@ -16,13 +16,16 @@ export default observer(function ToDoList() {
         if (todo) setSelectedTodo(todo);
         setIsAdd(!isAdd);
     }
+    function HandleCloseForm(){
+        setIsAdd(false);
+    }
     return (
         <Grid centered>
             <Grid.Row >
-                <Button style={{ position: 'static', top: '20px' }} content="Add" onClick={() => HandleAdd()} />
+                <Button style={{ marginTop: "15px" }} content="Add" onClick={() => HandleAdd()} />
             </Grid.Row>
             <Grid.Column width={16}>
-                {isAdd && !selectedToDo && <EditForm />}
+                {(isAdd && !selectedToDo) && <EditForm closeForm={HandleCloseForm} />}
             </Grid.Column>
             <Grid.Column width={16}>
                 {toDoList.map(([group, list]) => (
@@ -30,7 +33,7 @@ export default observer(function ToDoList() {
                         <Item.Group divided>
                             <Header content={group} color="teal" />
                             {list.map(toDo => (
-                                <ToDoItem toDo={toDo}  key={toDo.id}/>
+                                <ToDoItem toDo={toDo} key={toDo.id}/>
                             ))}
                         </Item.Group>
                     </Segment>

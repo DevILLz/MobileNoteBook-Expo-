@@ -14,8 +14,11 @@ import * as Yup from 'yup';
 import { Segment } from 'semantic-ui-react';
 import { Header } from 'semantic-ui-react';
 import { format } from 'date-fns';
+interface Props{
+    closeForm : () => void;
+}
 
-export default observer(function EditForm() {
+export default observer(function EditForm({closeForm} : Props) {
     const [isImportant, setIsImportant] = useState(false);
     const { ToDoListStore } = useStore();
     const { createToDo, updateToDo, loadingInitial, clearSelectedToDo, selectedToDo, loading } = ToDoListStore;
@@ -82,7 +85,7 @@ export default observer(function EditForm() {
                                         disabled={isSubmitting || !isValid}
                                         loading={isSubmitting} floated="right" positive type="submit" content="Submit" />
 
-                                    <Button floated="right" negative type="button" content="Cancel" onClick={() => {setIsOpen(false);}} />
+                                    <Button floated="right" negative type="button" content="Cancel" onClick={() => {setIsOpen(false); clearSelectedToDo()}} />
                                 </Form>
                             )}
                         </Formik>

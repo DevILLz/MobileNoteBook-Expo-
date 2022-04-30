@@ -1,10 +1,9 @@
-import { Grid, Button } from 'semantic-ui-react';
+import { Grid, GridColumn } from 'semantic-ui-react';
 import { observer } from 'mobx-react-lite';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import ToDoList from './ToDoList';
 import LoadingComponent from './../../../app/layout/LoadingComponents';
 import { useStore } from './../../../app/stores/store';
-
 
 export default observer(function ToDoDashboard() {
     
@@ -17,6 +16,10 @@ export default observer(function ToDoDashboard() {
      
     if (ToDoListStore.loadingInitial) return <LoadingComponent content="Loading app" />
     return (
-        <ToDoList/>
+        <Grid>
+            <GridColumn width="16">
+            <ToDoList/>
+            </GridColumn>
+        </Grid>
     )
 })
