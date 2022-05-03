@@ -58,7 +58,7 @@ export default observer(function ToDoList() {
                     </View>
                 }
                 renderSectionHeader={({ section: { title } }) => (
-                    <Text style={styles.header}>{title}</Text>
+                    <Text style={styles.header}>{title}   </Text>
                 )}
             />
         </View>
