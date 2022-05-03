@@ -64,7 +64,7 @@ export default observer(function EditForm({ closeForm }: Props) {
                     size={20}
                     fillColor="green"
                     unfillColor="#aaa"
-                    text="Is Important ?"
+                    text="Is Important ?     "
                     textStyle={styles.title}
                     iconStyle={{ borderColor: "green", alignSelf: "center" }}
                     onPress={(isChecked: boolean) => { setIsImportant(isChecked) }}

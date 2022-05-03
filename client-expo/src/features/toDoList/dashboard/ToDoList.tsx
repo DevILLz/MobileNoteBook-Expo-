@@ -39,7 +39,7 @@ export default observer(function ToDoList() {
             <View style={styles.NavBar}>
                 <Text>Completed {totalCompleatedTasks} / {totalTasks}   </Text>
                 <Pressable style={styles.addButton} onPress={HandleAdd}>
-                    <Text style={styles.buttonText}>Add new Note</Text>
+                    <Text style={styles.buttonText}>Add new Note   </Text>
                 </Pressable>
             </View>
             {isAdd

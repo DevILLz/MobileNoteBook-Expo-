@@ -15,6 +15,11 @@ namespace Infrastructure
             try
             {
                 context = JsonSerializer.Deserialize<List<ToDo>>(File.ReadAllText(DATABASE_PATH));
+                if (context.Count == 0)
+                {
+                    context = Seed();
+                    Save().Wait();
+                }
             }
             catch
             {

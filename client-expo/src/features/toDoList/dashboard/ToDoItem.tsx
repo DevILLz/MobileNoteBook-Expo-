@@ -29,14 +29,14 @@ export default observer(function ToDoItem({ toDo, edit }: Props) {
     return (
         <View style={styles.ColumnsGroup}>
             <View style={styles.column1}>
-                {toDo.isImportant && <Text style={styles.important}>Important</Text>}
+                {toDo.isImportant && <Text style={styles.important}>Important </Text>}
 
                 <BouncyCheckbox
                     isChecked={toDo.isCompleted}
                     size={20}
                     fillColor="green"
                     unfillColor="#aaa"
-                    text={toDo.description}
+                    text={toDo.description + "    "}
                     textStyle={styles.title}
                     textContainerStyle={styles.title}
                     iconStyle={{ borderColor: "green", alignSelf: "center" }}
@@ -46,20 +46,20 @@ export default observer(function ToDoItem({ toDo, edit }: Props) {
 
                 {toDo.deadLine
                     ? <Text style={styles.deadline}>
-                        Deadline:  {format(toDo.deadLine, 'dd MMM yyyy')}
+                        Deadline:  {format(toDo.deadLine, 'dd MMM yyyy')} 
                     </Text>
                     :
                     <Text style={styles.deadline}>
-                        No deadline
+                        No deadline 
                     </Text>
                 }
             </View>
             <View style={styles.column2}>
                 <Pressable style={styles.button} onPress={() => edit(toDo)}>
-                    <Text style={styles.buttonText}>edit</Text>
+                    <Text style={styles.buttonText}>edit </Text>
                 </Pressable>
                 <Pressable style={styles.button2} onPress={handleDelete}>
-                    <Text style={styles.buttonText}>del</Text>
+                    <Text style={styles.buttonText}>del </Text>
                 </Pressable>
             </View>
         </View>
