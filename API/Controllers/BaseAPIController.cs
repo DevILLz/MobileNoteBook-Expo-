@@ -1,16 +1,12 @@
 using Application.Core;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TestForMonarchy.Controllers;
+namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class BaseAPIController : ControllerBase
 {
-    private IMediator mediator;
-
-    protected IMediator Mediator => mediator ??= HttpContext.RequestServices.GetService<IMediator>();
     protected ActionResult HandleResult<T>(Result<T> result)
     {
         if (result == null) return NotFound();

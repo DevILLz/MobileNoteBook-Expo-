@@ -1,12 +1,11 @@
-using TestForMonarchy.Extensions;
-using TestForMonarchy.Middleware;
+using API.Extensions;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddApplicationServices(builder.Configuration)
-                .AddApplicationServicesAsync(builder.Configuration);
+builder.Services.AddApplicationServices(builder.Configuration);
 
 builder.WebHost.UseUrls(urls: "http://*:5000");
 var app = builder.Build();
