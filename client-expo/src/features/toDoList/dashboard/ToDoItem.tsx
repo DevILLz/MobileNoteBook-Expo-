@@ -3,8 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { v4 as uuid } from 'uuid';
 import { useStore } from './../../../app/stores/store';
 import { toDo } from './../../../app/models/toDo';
-import { Text, StyleSheet, Button } from 'react-native';
-import { Col, Grid } from "react-native-easy-grid";
+import { Text, StyleSheet, Button, View, Pressable } from 'react-native';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { runInAction } from 'mobx';
 
@@ -28,20 +27,23 @@ export default observer(function ToDoItem({ toDo, edit }: Props) {
     }
 
     return (
-        <Grid>
-            <Col size={80}>
+        <View style={styles.ColumnsGroup}>
+            <View style={styles.column1}>
                 {toDo.isImportant && <Text style={styles.important}>Important</Text>}
-                <Text style={styles.title}>
-                    <BouncyCheckbox
-                        isChecked={toDo.isCompleted}
-                        size={20}
-                        fillColor="green"
-                        unfillColor="#aaa"
-                        iconStyle={{ borderColor: "green", alignSelf: "center" }}
-                        onPress={(isChecked: boolean) => { handleIsCompleated(isChecked) }}
-                    />
-                    {toDo.description}
-                </Text>
+
+                <BouncyCheckbox
+                    isChecked={toDo.isCompleted}
+                    size={20}
+                    fillColor="green"
+                    unfillColor="#aaa"
+                    text={toDo.description}
+                    textStyle={styles.title}
+                    textContainerStyle={styles.title}
+                    iconStyle={{ borderColor: "green", alignSelf: "center" }}
+                    onPress={(isChecked: boolean) => { handleIsCompleated(isChecked) }}
+                >
+                </BouncyCheckbox>
+
                 {toDo.deadLine
                     ? <Text style={styles.deadline}>
                         Deadline:  {format(toDo.deadLine, 'dd MMM yyyy')}
@@ -51,16 +53,30 @@ export default observer(function ToDoItem({ toDo, edit }: Props) {
                         No deadline
                     </Text>
                 }
-            </Col>
-            <Col size={20}>
-                <Button title="edit" onPress={() => edit(toDo)} color='green' />
-                <Button title="del" onPress={handleDelete} color='red' />
-            </Col>
-        </Grid>
+            </View>
+            <View style={styles.column2}>
+                <Pressable style={styles.button} onPress={() => edit(toDo)}>
+                    <Text style={styles.buttonText}>edit</Text>
+                </Pressable>
+                <Pressable style={styles.button2} onPress={handleDelete}>
+                    <Text style={styles.buttonText}>del</Text>
+                </Pressable>
+            </View>
+        </View>
     )
 })
 const styles = StyleSheet.create({
-
+    ColumnsGroup:{
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    column1:{
+        width: "75%",
+    },
+    column2:{
+        justifyContent: "center",
+        width: "20%",
+    },
     title: {
         fontSize: 20,
         color: "black",
@@ -72,13 +88,33 @@ const styles = StyleSheet.create({
         color: "#666",
         textAlignVertical: "center",
     },
-    button: {
-        margin: 3
-    },
     important: {
         color: "red",
         fontSize: 14,
         margin: 3,
-        alignSelf: "center",
-    }
+        // alignSelf: "center",
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 4,
+        borderRadius: 4,
+        backgroundColor: '#038c2c',
+      },
+      button2: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 4,
+        borderRadius: 4,
+        backgroundColor: '#ff2e2e',
+      },
+      buttonText: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+        textTransform: 'uppercase',
+      }
+    
 });

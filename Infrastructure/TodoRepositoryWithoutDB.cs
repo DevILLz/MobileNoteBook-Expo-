@@ -24,12 +24,13 @@ namespace Infrastructure
             }
         }
 
-        public async Task<Result<bool>> Create(ToDo todo)
+        public async Task<Result<Guid>> Create(ToDo todo)
         {
+            todo.Id = Guid.NewGuid();
             context.Add(todo);
             if (!await Save())
-                return Result<bool>.Failure("Failed to create task");
-            return Result<bool>.Success(true);
+                return Result<Guid>.Failure("Failed to create task");
+            return Result<Guid>.Success(todo.Id);
         }
 
         public async Task<Result<bool>> Delete(Guid id)
@@ -42,7 +43,7 @@ namespace Infrastructure
             return Result<bool>.Success(true);
         }
 
-        public async Task<Result<ToDo>> Details(Guid id) => Result<ToDo>.Success(context.FirstOrDefault(x => x.Id == id));
+        public async Task<Result<ToDo>> Details(Guid id) => await Task.Factory.StartNew(() => Result<ToDo>.Success(context.FirstOrDefault(x => x.Id == id)));
 
         public async Task<Result<bool>> Edit(ToDo todo)
         {
@@ -61,7 +62,7 @@ namespace Infrastructure
             return Result<bool>.Success(true);
         }
 
-        public async Task<Result<IEnumerable<ToDo>>> List() => Result<IEnumerable<ToDo>>.Success(context.ToList());
+        public async Task<Result<IEnumerable<ToDo>>> List() => await Task.Factory.StartNew(() => Result<IEnumerable<ToDo>>.Success(context.ToList()));
 
         private List<ToDo> Seed()
         {

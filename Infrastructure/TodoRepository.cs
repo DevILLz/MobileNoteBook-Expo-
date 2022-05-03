@@ -11,12 +11,13 @@ namespace Infrastructure
         private DataContext context;
 
         public TodoRepository(DataContext context) => this.context = context;
-        public async Task<Result<bool>> Create(ToDo todo)
+        public async Task<Result<Guid>> Create(ToDo todo)
         {
+            todo.Id = Guid.NewGuid();
             context.ToDoList.Add(todo);
             if (!(await context.SaveChangesAsync() > 0))
-                return Result<bool>.Failure("Failed to create task");
-            return Result<bool>.Success(true);
+                return Result<Guid>.Failure("Failed to create task");
+            return Result<Guid>.Success(todo.Id);
         }
 
         public async Task<Result<bool>> Delete(Guid id)

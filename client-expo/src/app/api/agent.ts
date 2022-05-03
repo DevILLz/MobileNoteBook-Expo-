@@ -53,7 +53,7 @@ const requests = {
 const toDoList = {
     list: () => requests.get<toDo[]>('/toDo'),
     details: (id: string) => requests.get<toDo>(`/toDo/${id}`),
-    create: (toDo: toDoFormValues) => requests.post<void>(`/toDo/`, toDo),
+    create: (toDo: toDoFormValues) => requests.post<string>(`/toDo/`, toDo),
     update: (toDo: toDoFormValues) => requests.put<void>(`/toDo/${toDo.id}`, toDo),
     delete: (id: string) => requests.delete<void>(`/toDo/${id}`),
 }

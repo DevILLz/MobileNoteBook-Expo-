@@ -8,7 +8,9 @@ export default class ToDoListStore {
     selectedToDo: toDo | undefined = undefined;
     editMode = false;
     loading = false;
-    loadingInitial = false
+    loadingInitial = false;
+    totalTasks = 0;
+    totalCompleatedTasks = 0;
     constructor() {
         makeAutoObservable(this)
     }
@@ -30,6 +32,7 @@ export default class ToDoListStore {
         try {
             // Не пихать async\await внутрь
             toDoList.forEach(todo => this.setToDo(todo))
+            this.checkTasks(toDoList);
             this.setLoadingInitial(false);
         }
         catch (e) {
@@ -42,11 +45,12 @@ export default class ToDoListStore {
     }
     createToDo = async (newNote: toDoFormValues) => {
         try {
-            await agent.toDoList.create(newNote);
+            const id = await agent.toDoList.create(newNote);
+            newNote.id = id;
             const createdNote = new toDo(newNote);
 
             this.setToDo(createdNote);
-            this.clearSelectedToDo();
+            this.checkTasks(Array.from(this.toDoList.values()));
 
         } catch (error) {
             console.log(error);
@@ -59,8 +63,8 @@ export default class ToDoListStore {
                 if (note.id){
                     let updatednote = {...this.getToDo(note.id), ...note}
                     this.toDoList.set(note.id, updatednote as toDo);
-                    this.selectedToDo = updatednote as toDo;
                 }
+                this.checkTasks(Array.from(this.toDoList.values()));
             });
         } catch (error) {
             console.log(error);
@@ -73,6 +77,7 @@ export default class ToDoListStore {
             runInAction(() => {
                 this.toDoList.delete(id);
                 this.loading = false;
+                this.checkTasks(Array.from(this.toDoList.values()));
             });
         } catch (error) {
             console.log(error);
@@ -96,5 +101,9 @@ export default class ToDoListStore {
     }
     private getToDo = (id: string) => {
         return this.toDoList.get(id);
+    }
+    private checkTasks = (list: toDo[]) => {
+        this.totalTasks = list.length;
+        this.totalCompleatedTasks = list.filter(x => x.isCompleted == true).length;
     }
 }

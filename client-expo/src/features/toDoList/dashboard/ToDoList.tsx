@@ -1,10 +1,10 @@
+import { View, StyleSheet, SectionList, Text, StatusBar, Pressable } from 'react-native';
 import { observer } from 'mobx-react-lite';
 import { useStore } from './../../../app/stores/store';
 import { toDo } from './../../../app/models/toDo';
 import EditForm from './EditForm'
 import { useState, useEffect } from 'react';
 import ToDoItem from './ToDoItem';
-import { View, StyleSheet, SectionList, Text, StatusBar, Button } from 'react-native';
 
 interface list {
     title: string;
@@ -15,7 +15,7 @@ export default observer(function ToDoList() {
     const [isAdd, setIsAdd] = useState(false);
     const [DATA, setDATA] = useState<list[]>([]);
     const { ToDoListStore } = useStore();
-    const { groupedListByDate: toDoList, selectedToDo, setSelectedTodo } = ToDoListStore;
+    const { groupedListByDate: toDoList, selectedToDo, setSelectedTodo, totalTasks, totalCompleatedTasks } = ToDoListStore;
     const [isEditing, setIsEditing] = useState(false);
     function handleEdit(todo?: toDo): void {
         setIsEditing(todo ? true : false);
@@ -36,11 +36,16 @@ export default observer(function ToDoList() {
     }, [toDoList])
     return (
         <View style={styles.list}>
+            <View style={styles.NavBar}>
+                <Text>Completed {totalCompleatedTasks} / {totalTasks}   </Text>
+                <Pressable style={styles.addButton} onPress={HandleAdd}>
+                    <Text style={styles.buttonText}>Add new Note</Text>
+                </Pressable>
+            </View>
             {isAdd
-                ? <View style={styles.item}>
+                && <View style={styles.item}>
                     <EditForm closeForm={HandleAdd} />
-                  </View>
-                : <Button title="Add new Note" onPress={HandleAdd} color='orange' />
+                </View>
             }
             <SectionList
                 sections={DATA}
@@ -65,6 +70,13 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: StatusBar.currentHeight
     },
+    NavBar:{
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginHorizontal: 5,
+        margin: 5
+    },
     item: {
         fontSize: 24,
         backgroundColor: "#bbb",
@@ -73,7 +85,7 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
         borderStyle: 'solid',
         borderWidth: 1,
-        position: "relative",
+        borderRadius: 5
         
     },
     header: {
@@ -87,5 +99,21 @@ const styles = StyleSheet.create({
     },
     list: {
         alignContent: "stretch",
-    }
+    },
+    addButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 4,
+        borderRadius: 4,
+        backgroundColor: '#ffb833',
+      },
+
+      buttonText: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+        textTransform: 'uppercase',
+      }
 });
