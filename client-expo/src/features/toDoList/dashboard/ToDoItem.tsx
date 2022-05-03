@@ -71,11 +71,11 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     column1:{
-        width: "75%",
+        width: "70%",
     },
     column2:{
         justifyContent: "center",
-        width: "20%",
+        width: "25%",
     },
     title: {
         fontSize: 20,
