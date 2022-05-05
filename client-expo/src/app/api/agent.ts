@@ -1,5 +1,6 @@
 import { toDo, toDoFormValues } from '../models/toDo';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import {API_URL} from '@env';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -7,11 +8,10 @@ const sleep = (delay: number) => {
     })
 }
 
-// axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-axios.defaults.baseURL = "http://192.168.1.72:5000/api";
+axios.defaults.baseURL = API_URL;
 
 axios.interceptors.response.use(async response => {
-    
+    // console.log(API_URL);
     if (process.env.NODE_ENV === 'development')
         await sleep(200)
     return response
