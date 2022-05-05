@@ -1,4 +1,4 @@
-import { View, StyleSheet, SectionList, Text, StatusBar, Pressable } from 'react-native';
+import { View, SafeAreaView, StyleSheet, SectionList, ScrollView, Text, StatusBar, Pressable } from 'react-native';
 import { observer } from 'mobx-react-lite';
 import { useStore } from './../../../app/stores/store';
 import { toDo } from './../../../app/models/toDo';
@@ -35,7 +35,7 @@ export default observer(function ToDoList() {
             setDATA(data);
     }, [toDoList])
     return (
-        <View style={styles.list}>
+        <SafeAreaView style={styles.list}>
             <View style={styles.NavBar}>
                 <Text>Completed {totalCompleatedTasks} / {totalTasks}   </Text>
                 <Pressable style={styles.addButton} onPress={HandleAdd}>
@@ -61,7 +61,7 @@ export default observer(function ToDoList() {
                     <Text style={styles.header}>{title}   </Text>
                 )}
             />
-        </View>
+        </SafeAreaView>
     )
 })
 
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     },
     list: {
         alignContent: "stretch",
+        paddingBottom: 115,
     },
     addButton: {
         alignItems: 'center',
